@@ -1,0 +1,36 @@
+  Chess.Main.resources - Embedded, ContainedInManifestFile, 
+  Chess.play.resources - Embedded, ContainedInManifestFile, 
+ImageRuntimeVersion: v4.0.30319
+Assembly Chess, Version=0.0.*, Culture=Инвариантный язык (Инвариантная страна): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class Chess.play: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(System.Windows.Forms.Form, Int32, Boolean, std.basic_string<char\,std::char_traits<char>\,std::allocator<char> >*, System.Windows.Forms.ProgressBar): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    chess* game : Public
+    neuralNetwork* AI : Public
+    std.basic_string<char\,std::char_traits<char>\,std::allocator<char> >* path : Public
+    Int32 last : Public
+    Int32 type : Public
+    System.Windows.Forms.ProgressBar progress : Public
+    Boolean youWhite : Public
+Class Chess.Main: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    msclr.interop.marshal_context context IsByValue : Public, InitOnly
+    std.basic_string<char\,std::char_traits<char>\,std::allocator<char> >* path1 : Public
+    std.basic_string<char\,std::char_traits<char>\,std::allocator<char> >* path2 : Public
+    System.Windows.Forms.ProgressBar progress : Public

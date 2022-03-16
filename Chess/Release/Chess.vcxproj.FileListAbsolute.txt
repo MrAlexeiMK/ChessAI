@@ -1,0 +1,3 @@
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\Release\Chess.Main.resources
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\Release\Chess.play.resources
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\Release\Chess.vcxproj.GenerateResource.cache

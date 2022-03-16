@@ -1,0 +1,24 @@
+Main: Шахматы
+Main.Settings: Настройки
+Main.About: О программе
+Main.FAQ: FAQ
+Main.Author: Автор
+Main.SinglePlay: Играть на двоих
+Main.AiPlay: Играть против ИИ
+Main.DoTrain: обучаться
+Main.StartTrain: Начать обучение
+Settings.Lang.Label: Язык
+Settings.FirstStep.Label: Первый ход
+Settings.PlaySound.Label: ____Звук
+Settings.FirstStep.ComboBox.1: 50/50
+Settings.FirstStep.ComboBox.2: белые
+Settings.FirstStep.ComboBox.3: чёрные
+Settings.MaxSteps.Label: Макc. ходов
+Settings.Layers.Label: Слои
+Settings.Lr.Label: Коэффициент
+Game.EndGame.white: ИГРА ОКОНЧЕНА! Победили Белые
+Game.EndGame.black: ИГРА ОКОНЧЕНА! Победили Чёрные
+Game.EndGame.draw: ИГРА ОКОНЧЕНА! Ничья
+Game.Back: В главное меню
+Game.Training: Партия завершена. Идёт тренировка нейросети на данной партии и сохранение весов...
+Game.Training.Done: Готово

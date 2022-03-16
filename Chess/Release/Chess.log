@@ -1,0 +1,20 @@
+﻿  chess.cpp
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\chess.cpp(678,23): warning C4018: <: несоответствие типов со знаком и без знака
+  complex.cpp
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\complex.cpp(102,23): warning C4018: <: несоответствие типов со знаком и без знака
+  Main.cpp
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\Main.h(17,42): warning C4677: context: сигнатура члена, не являющегося частным, содержит частный тип сборки "msclr::interop::marshal_context"
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\msclr\marshal.h(339): message : см. объявление "msclr::interop::marshal_context"
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\Main.h(30,14): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  matrix.cpp
+  neuralNetwork.cpp
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\neuralNetwork.cpp(26,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\neuralNetwork.cpp(118,26): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\neuralNetwork.cpp(125,26): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\neuralNetwork.cpp(149,26): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\neuralNetwork.cpp(153,26): warning C4018: <: несоответствие типов со знаком и без знака
+  play.cpp
+  .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
+  Создание кода...
+  chess.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+  Chess.vcxproj -> D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Release\Chess.exe

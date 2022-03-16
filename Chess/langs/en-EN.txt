@@ -1,0 +1,24 @@
+Main: Chess
+Main.Settings: Settings
+Main.About: About
+Main.FAQ: FAQ
+Main.Author: Author
+Main.SinglePlay: Play
+Main.AiPlay: Play against AI
+Main.DoTrain: train
+Main.StartTrain: Start training
+Settings.Lang.Label: Language
+Settings.FirstStep.Label: First step
+Settings.PlaySound.Label: ___Sound
+Settings.FirstStep.ComboBox.1: 50/50
+Settings.FirstStep.ComboBox.2: white
+Settings.FirstStep.ComboBox.3: black
+Settings.MaxSteps.Label: Max. steps
+Settings.Layers.Label: Layers
+Settings.Lr.Label: Factor
+Game.EndGame.white: GAME ENDED! Winner is White
+Game.EndGame.black: GAME ENDED! Winner is Black
+Game.EndGame.draw: GAME ENDED! Draw
+Game.Back: Back to menu
+Game.Training: Game ended. The neural network is being trained on this game and the weights are being saved...
+Game.Training.Done: Done

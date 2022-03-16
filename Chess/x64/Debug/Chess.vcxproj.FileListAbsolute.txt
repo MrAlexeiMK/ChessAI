@@ -1,0 +1,7 @@
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\x64\Debug\Chess.vcxprojAssemblyReference.cache
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\x64\Debug\Chess.Main.resources
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\x64\Debug\Chess.play.resources
+D:\Catalog\Projects\MachineLearning\Chess\C++\Chess\Chess\x64\Debug\Chess.vcxproj.GenerateResource.cache
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\x64\Debug\Chess.Main.resources
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\x64\Debug\Chess.play.resources
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\x64\Debug\Chess.vcxproj.GenerateResource.cache

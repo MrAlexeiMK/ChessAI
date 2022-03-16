@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chess", "Chess\Chess.vcxproj", "{89419153-CC3E-4436-9855-82F4CF7DD5DA}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Chess by MrAlexeiMK", "Setup\Шахматы.vdproj", "{786E8967-A581-494D-A83C-6B33E439D733}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89419153-CC3E-4436-9855-82F4CF7DD5DA}.Debug|x64.ActiveCfg = Debug|Win32
+		{89419153-CC3E-4436-9855-82F4CF7DD5DA}.Debug|x64.Build.0 = Debug|Win32
+		{89419153-CC3E-4436-9855-82F4CF7DD5DA}.Debug|x86.ActiveCfg = Debug|Win32
+		{89419153-CC3E-4436-9855-82F4CF7DD5DA}.Debug|x86.Build.0 = Debug|Win32
+		{89419153-CC3E-4436-9855-82F4CF7DD5DA}.Release|x64.ActiveCfg = Release|x64
+		{89419153-CC3E-4436-9855-82F4CF7DD5DA}.Release|x64.Build.0 = Release|x64
+		{89419153-CC3E-4436-9855-82F4CF7DD5DA}.Release|x86.ActiveCfg = Release|Win32
+		{89419153-CC3E-4436-9855-82F4CF7DD5DA}.Release|x86.Build.0 = Release|Win32
+		{786E8967-A581-494D-A83C-6B33E439D733}.Debug|x64.ActiveCfg = Debug
+		{786E8967-A581-494D-A83C-6B33E439D733}.Debug|x64.Build.0 = Debug
+		{786E8967-A581-494D-A83C-6B33E439D733}.Debug|x86.ActiveCfg = Debug
+		{786E8967-A581-494D-A83C-6B33E439D733}.Debug|x86.Build.0 = Debug
+		{786E8967-A581-494D-A83C-6B33E439D733}.Release|x64.ActiveCfg = Release
+		{786E8967-A581-494D-A83C-6B33E439D733}.Release|x86.ActiveCfg = Release
+		{786E8967-A581-494D-A83C-6B33E439D733}.Release|x86.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3FB8850-EFB7-4842-AA4C-51056621EB9E}
+	EndGlobalSection
+EndGlobal

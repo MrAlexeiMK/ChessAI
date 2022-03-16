@@ -1,0 +1,27 @@
+﻿  chess.cpp
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\chess.cpp(35,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\chess.cpp(49,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\chess.cpp(63,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\chess.cpp(82,19): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\chess.cpp(226,25): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\chess.cpp(766,52): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\chess.cpp(773,53): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  complex.cpp
+  Main.cpp
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\play.h(1584,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\play.h(1604,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\Main.h(17,42): warning C4677: context: сигнатура члена, не являющегося частным, содержит частный тип сборки "msclr::interop::marshal_context"
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\msclr\marshal.h(339): message : см. объявление "msclr::interop::marshal_context"
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\Main.h(37,14): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  matrix.cpp
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\matrix.cpp(41,17): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  neuralNetwork.cpp
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\neuralNetwork.cpp(15,25): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  play.cpp
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\play.h(1584,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\play.h(1604,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
+  Создание кода...
+D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\Chess\chess.cpp(785): warning C4715: chess::doStepAI: значение возвращается не при всех путях выполнения
+  chess.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+  Chess.vcxproj -> D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\Chess\x64\Debug\Chess.exe
