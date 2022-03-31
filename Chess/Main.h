@@ -432,7 +432,7 @@ namespace Chess {
 			progress->Value += e->ProgressPercentage;
 		}
 		System::Void faq_Click(System::Object^ sender, System::EventArgs^ e) {
-			Process::Start("https://github.com/MrAlexeiMK/Chess");
+			Process::Start("https://github.com/MrAlexeiMK/ChessAI");
 		}
 		System::Void settings_Click(System::Object^ sender, System::EventArgs^ e) {
 			settings^ s = gcnew settings();

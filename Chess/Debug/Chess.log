@@ -1,3 +1,7 @@
-﻿  mcts.cpp
+﻿  Main.cpp
+  chess.cpp
+  matrix.cpp
+  play.cpp
+  Создание кода...
   chess.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
   Chess.vcxproj -> D:\Catalog\Projects\MachineLearning\ChessAI\Debug\Chess.exe
