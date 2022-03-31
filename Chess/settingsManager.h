@@ -14,12 +14,17 @@ public:
 	bool playSound = true;
 	int maxSteps = 150;
 	std::vector<int> layers;
-	double lr;
+	double lr = 0.1;
+	int simulations = 10;
+	int historySteps = 5;
+	int depth = 20;
+	int maxDepth = 8;
 
 	static settingsManager& getInstance() {
 		static settingsManager instance;
 		return instance;
 	}
+
 	void init(std::string path) {
 		System::IO::Directory::CreateDirectory(gcnew System::String(path.c_str()));
 		System::IO::Directory::CreateDirectory(gcnew System::String((path+"weights\\").c_str()));
@@ -40,23 +45,33 @@ public:
 		std::ifstream fin(path+"settings.txt");
 		if (!fin.good()) fin.open("settings.txt");
 		
+		std::string tempLayers;
 		fin >> temp >> langFile;
 		fin >> temp >> firstStep;
 		fin >> temp >> playSound;
 		fin >> temp >> maxSteps;
-		fin >> temp >> temp;
-		parseLayers(temp);
+		fin >> temp >> tempLayers;
 		fin >> temp >> lr;
+		fin >> temp >> simulations;
+		fin >> temp >> historySteps;
+		fin >> temp >> depth;
+		fin >> temp >> maxDepth;
+		parseLayers(tempLayers);
 
 		fin.close();
 	}
-	void update(std::string langFile, int firstStep, bool playSound, int maxSteps, std::string layers, double lr) {
+	void update(std::string langFile, int firstStep, bool playSound, int maxSteps, std::string layers, double lr, 
+		int simulations, int historySteps, int depth, int maxDepth) {
 		this->langFile = langFile;
 		this->firstStep = firstStep;
 		this->playSound = playSound;
 		this->maxSteps = maxSteps;
 		parseLayers(layers);
 		this->lr = lr;
+		this->simulations = simulations;
+		this->historySteps = historySteps;
+		this->depth = depth;
+		this->maxDepth = maxDepth;
 
 		std::ofstream fout(path+"settings.txt");
 
@@ -66,6 +81,10 @@ public:
 		fout << "MaxSteps: " << maxSteps << std::endl;
 		fout << "Layers: " << layersToString() << std::endl;
 		fout << "LearningRate: " << lr << std::endl;
+		fout << "Simulations: " << simulations << std::endl;
+		fout << "HistorySteps: " << historySteps << std::endl;
+		fout << "Depth: " << depth << std::endl;
+		fout << "MaxDepth: " << maxDepth << std::endl;
 
 		fout.close();
 	}
@@ -116,7 +135,7 @@ private:
 	void parseLayers(std::string str) {
 		layers.clear();
 		std::string layer = "";
-		for (int i = 0; i < str.size(); ++i) {
+		for (size_t i = 0; i < str.size(); ++i) {
 			if (str[i] == ',') {
 				layers.push_back(atoi(layer.c_str()));
 				layer = "";
@@ -126,14 +145,12 @@ private:
 		if (layer != "") {
 			layers.push_back(atoi(layer.c_str()));
 		}
-		layers[0] = 574;
+		layers[0] = 256*historySteps;
 		layers[layers.size()-1] = 1;
 	}
 
 	settingsManager() {}
-	~settingsManager() {
-		mapLang.clear();
-	};
+	~settingsManager() {}
 
 	settingsManager(settingsManager const&) = delete;
 	settingsManager& operator=(settingsManager const&) = delete;

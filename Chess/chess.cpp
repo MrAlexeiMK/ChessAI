@@ -1,7 +1,8 @@
 #include "chess.h"
-#include <bitset>
+#include "settingsManager.h"
+#include "logManager.h"
 #include <time.h>
-#include <algorithm>
+#include <functional>
 
 void merge(vector<pair<pair<double, step>, vector<double>>>& arr, int l, int m, int r, bool reverse = false) {
     vector<pair<pair<double, step>, vector<double>>> temp;
@@ -19,7 +20,7 @@ void merge(vector<pair<pair<double, step>, vector<double>>>& arr, int l, int m, 
         }
         ++k;
     }
-    for (int i = 0; i < temp.size(); ++i) arr[l + i] = temp[i];
+    for (size_t i = 0; i < temp.size(); ++i) arr[l + i] = temp[i];
 }
 
 void merge_sort(vector<pair<pair<double, step>, vector<double>>>& arr, int l, int r, bool reverse = false) {
@@ -32,7 +33,7 @@ void merge_sort(vector<pair<pair<double, step>, vector<double>>>& arr, int l, in
 }
 
 chess::chess() {
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
     pos = new char*[8];
     for (int i = 0; i < 8; ++i) {
         pos[i] = new char[8];
@@ -42,33 +43,15 @@ chess::chess() {
     }
     coords king1 = {7, 4}, king2 = {0, 4};
     vector<step> st;
-    MAX_STEPS = 1000;
     isVirtual = false;
-    prop = {false, false, false, false, false, false, king1, king2, true, st, false, 0, 0};
-    updateFigs();
-    updateSteps();
-}
-
-chess::chess(int max_steps) {
-    srand(time(NULL));
-    pos = new char* [8];
-    for (int i = 0; i < 8; ++i) {
-        pos[i] = new char[8];
-        for (int j = 0; j < 8; ++j) {
-            pos[i][j] = defaultPos[i][j];
-        }
-    }
-    coords king1 = { 7, 4 }, king2 = { 0, 4 };
-    vector<step> st;
-    MAX_STEPS = max_steps;
-    isVirtual = false;
-    prop = { false, false, false, false, false, false, king1, king2, true, st, false, 0, 0 };
+    prop = {0, false, false, false, false, false, false, king1, king2, true, st, false, 0, 0};
+    fillTrainingData();
     updateFigs();
     updateSteps();
 }
 
 chess::chess(char** start_pos) {
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
     pos = new char* [8];
     for (int i = 0; i < 8; ++i) {
         pos[i] = new char[8];
@@ -78,9 +61,9 @@ chess::chess(char** start_pos) {
     }
     coords king1 = {7, 4}, king2 = {0, 4};
     vector<step> st;
-    MAX_STEPS = 1000;
     isVirtual = false;
-    prop = {false, false, false, false, false, false, king1, king2, true, st, false, 0, 0};
+    prop = {0, false, false, false, false, false, false, king1, king2, true, st, false, 0, 0};
+    fillTrainingData();
     updateFigs();
     updateSteps();
 }
@@ -95,11 +78,11 @@ chess::chess(char** start_pos, properties props, bool virt = false) {
     }
     isVirtual = virt;
     prop = props;
-    MAX_STEPS = 1000;
     if (!isVirtual) {
-        srand(time(NULL));
+        srand((unsigned int)time(NULL));
         updateFigs();
         updateSteps();
+        fillTrainingData();
     }
 }
 
@@ -114,8 +97,14 @@ void chess::clear() {
     delete[] pos;
 }
 
-void chess::setMaxSteps(int max_steps) {
-    MAX_STEPS = max_steps;
+void chess::fillTrainingData() {
+    for (int i = 0; i < settingsManager::getInstance().historySteps; ++i) {
+        training_data.push_back(toArray());
+    }
+}
+
+void chess::setUpdateTrainingData(bool ch) {
+    updateTrainingData = ch;
 }
 
 void chess::replay() {
@@ -129,8 +118,9 @@ void chess::replay() {
     coords king1 = { 7, 4 }, king2 = { 0, 4 };
     vector<step> st;
     isVirtual = false;
-    prop = { false, false, false, false, false, false, king1, king2, true, st, false, 0, 0 };
+    prop = {0, false, false, false, false, false, false, king1, king2, true, st, false, 0, 0 };
     training_data.clear();
+    fillTrainingData();
     updateFigs();
     updateSteps();
 }
@@ -200,39 +190,32 @@ vector<coords> chess::getFigs(string reg) {
     return res;
 }
 
+size_t chess::toHash() {
+    hash<string> hasher;
+    string s = "";
+    for (step st : prop.history) {
+        s += to_string(st.from.column) + to_string(st.from.row) + to_string(st.to.column) + to_string(st.to.row);
+    }
+    return s == "" ? 0 : hasher(s);
+}
+
+size_t chess::toHash(step st) {
+    hash<string> hasher;
+    string s = "";
+    for (step st : prop.history) {
+        s += to_string(st.from.column) + to_string(st.from.row) + to_string(st.to.column) + to_string(st.to.row);
+    }
+    s += to_string(st.from.column) + to_string(st.from.row) + to_string(st.to.column) + to_string(st.to.row);
+    return hasher(s);
+}
+
 vector<double> chess::toArray() {
-    vector<double> res(82 * 7, 0.01);
-    string reg = "012346789a";
-    int len = reg.size();
-    string temp;
-    int num = 0;
-    for (int i = 0; i < len; ++i) {
-        num = 8 * 7 * i;
-        vector<coords> c = getFigs(string(1, reg[i]));
-        for (coords v : c) {
-            temp = bitset< 7 >(8 * v.row + v.column + 1).to_string();
-            for (char c : temp) {
-                if (c == '0') res[num] = 0.01;
-                else res[num] = 0.99;
-                ++num;
+    vector<double> res;
+    for (int i = 0; i < 8; ++i) {
+        for (int j = 0; j < 8; ++j) {
+            for (double d : symbolMask[pos[i][j]]) {
+                res.push_back(d);
             }
-        }
-    }
-    num = 80 * 7;
-    for (coords v : getFigs("b")) {
-        temp = bitset< 7 >(8 * v.row + v.column + 1).to_string();
-        for (char c : temp) {
-            if (c == '0') res[num] = 0.01;
-            else res[num] = 0.99;
-            ++num;
-        }
-    }
-    for (coords v : getFigs("5")) {
-        temp = bitset< 7 >(8 * v.row + v.column + 1).to_string();
-        for (char c : temp) {
-            if (c == '0') res[num] = 0.01;
-            else res[num] = 0.99;
-            ++num;
         }
     }
     return res;
@@ -588,17 +571,24 @@ bool chess::isDraw() {
     return false;
 }
 
-string chess::getStatus() {
-    if (prop.repeat >= 6 || training_data.size() > MAX_STEPS || (current_figs.size() == 1 && opposite_figs.size() == 1)) {
+GameStatus chess::getStatus() {
+    if (isDraw() || prop.repeat >= 6 || prop.stepCounter > settingsManager::getInstance().maxSteps || (current_figs.size() == 1 && opposite_figs.size() == 1)) {
         current_steps.clear();
-        return "draw";
+        return GameStatus::DRAW;
     }
-    if (isDraw()) return "draw";
     if (isMate()) {
-        if (prop.isWhite) return "black";
-        return "white";
+        if (prop.isWhite) return GameStatus::BLACK;
+        return GameStatus::WHITE;
     }
-    return "ingame";
+    return GameStatus::GAME;
+}
+
+string chess::statusToString() {
+    GameStatus status = getStatus();
+    if (status == GameStatus::WHITE) return "white";
+    else if (status == GameStatus::BLACK) return "black";
+    else if (status == GameStatus::DRAW) return "draw";
+    else return "game";
 }
 
 bool chess::isValidStep(step st) {
@@ -679,8 +669,9 @@ bool chess::doStep(step st) {
                 prop.black_rook_right = true;
             }
         }
-
+        prop.stepCounter++;
         prop.isWhite = !prop.isWhite;
+        prop.history.push_back(st);
         updateFigs();
         if (!isVirtual) {
             if (prop.history.size() > 3) {
@@ -689,85 +680,110 @@ bool chess::doStep(step st) {
                 }
                 else prop.repeat = 0;
             }
-            prop.history.push_back(st);
             updateSteps();
-            training_data.push_back(toArray());
+            if (updateTrainingData) {
+                training_data.push_back(toArray());
+                training_data.erase(training_data.begin());
+            }
         }
-
         return true;
     }
     return false;
 }
 
-step chess::notationToSteps(string nt) {
-    map<char, int> conv; map<char, string> conv2;
-    conv['a'] = 0; conv['b'] = 1; conv['c'] = 2; conv['d'] = 3; conv['e'] = 4; conv['f'] = 5; conv['g'] = 6; conv['h'] = 7;
-    conv2['K'] = "5b"; conv2['Q'] = "4a"; conv2['N'] = "28"; conv2['R'] = "17"; conv2['B'] = "39";
-    coords nul = { -1, -1 };
-    coords from = nul, to = nul;
-    string target = "";
-    if (nt == "O-O" || nt == "O-O-O") {
-        target = "5b";
-    }
-    else if (nt.size() == 2) {
-        to = {8-(nt[1]-'0'), conv[nt[0]]};
-    }
-    else if (nt.size() == 3) {
-        target += nt[0];
-        to = { 8 - (nt[2] - '0'), conv[nt[1]] };
-    }
-    else if (nt.size() == 4) {
-
-    }
-    for (step st : current_steps) {
-        if (containsFig(target, st.from)) {
-
-        }
-    }
-    return { from, to };
-}
-
-step chess::doStepAI(neuralNetwork &AI) {
-    double eps = 0.15;
-    vector<pair<pair<double, step>, vector<double>>> arr;
+step chess::selectBestStep(neuralNetwork &AI) {
+    double maxQ = 0;
+    step res{};
     for (step st : current_steps) {
         chess virt_game(pos, prop, true);
         virt_game.doStep(st);
-        vector<double> inputs(virt_game.toArray());
+        vector<double> inputs;
+        for (size_t i = 1; i < training_data.size(); ++i) {
+            inputs.insert(inputs.end(), training_data[i].begin(), training_data[i].end());
+        }
+        vector<double> last = virt_game.toArray();
+        inputs.insert(inputs.end(), last.begin(), last.end());
         vector<double> outputs = AI.query(inputs);
         double Q = outputs[0];
-        arr.push_back(make_pair(make_pair(Q, st), inputs));
+        if (!prop.isWhite) Q = 1 - Q;
+        if (Q > maxQ) {
+            maxQ = Q;
+            res = st;
+        }
     }
-    if (!arr.empty()) {
-        vector<pair<pair<double, step>, vector<double>>> best_steps;
-        if (prop.isWhite) {
-            merge_sort(arr, 0, arr.size() - 1, true);
+    if (maxQ == 0) throw exception("step not found");
+    return res;
+}
+
+void chess::simulate(neuralNetwork& AI, size_t parent) {
+    mcts& tree = mcts::getInstance();
+    if (current_steps.empty()) return;
+    for (step st : current_steps) {
+        size_t hash = toHash(st);
+        tree.add(parent, hash, st);
+    }
+    for (int i = 0; i < settingsManager::getInstance().simulations; ++i) {
+        int r = rand()%tree.g[parent].childs.size();
+        size_t child = tree.g[parent].childs[r];
+        step st = tree.g[child].st;
+        chess game(pos, prop);
+        game.doStep(st);
+        bool isWhite = game.prop.isWhite;
+        vector<vector<double>> data(game.training_data);
+        game.setUpdateTrainingData(false);
+
+        int depth = 0;
+        while (game.getStatus() == GameStatus::GAME && depth < settingsManager::getInstance().depth) {
+            game.doStep(game.selectBestStep(AI));
+            ++depth;
         }
-        else {
-            merge_sort(arr, 0, arr.size() - 1, false);
+
+        if (game.getStatus() == GameStatus::WHITE || game.getStatus() == GameStatus::BLACK) {
+            GameStatus status = game.getStatus();
+            bool win = ((status == GameStatus::WHITE && isWhite) ||
+                (status == GameStatus::BLACK && !isWhite));
+            tree.update(child, win);
+            trainAI(AI, child, data, isWhite);
         }
-        for (auto p : arr) {
-            if (abs(p.first.first - arr[0].first.first) > eps) break;
-            best_steps.push_back(p);
-        }
-        int i = rand() % best_steps.size();
-        doStep(best_steps[i].first.second);
-        return best_steps[i].first.second;
     }
 }
 
-void chess::trainAI(neuralNetwork& AI) {
-    string status = getStatus();
-    double K = 0.5;
-    if (status == "white") {
-        K = 0.99;
+void chess::trainAI(neuralNetwork& AI, size_t node, vector<vector<double>> &data, bool isWhite) {
+    nodeInfo info = mcts::getInstance().g[node].info;
+    if (info.visits > 0) {
+        double K = (double)info.wins / (info.visits + eps);
+        if (!isWhite) K = 1 - K;
+        vector<double> train;
+        for (vector<double> v : data) {
+            train.insert(train.end(), v.begin(), v.end());
+        }
+        AI.train(train, vector<double>{K});
     }
-    else if (status == "black") {
-        K = 0.01;
+}
+
+step chess::doStepAI(neuralNetwork &AI, bool updateTree, bool train) {
+    mcts& tree = mcts::getInstance();
+    size_t hash = toHash();
+    size_t next = tree.select(hash);
+    if(train) trainAI(AI, hash, training_data, prop.isWhite);
+    if (updateTree) {
+        if (next == 1) {
+            simulate(AI, hash);
+            next = tree.select(hash);
+        }
+        if (next != 1) {
+            step st = tree.g[next].st;
+            doStep(st);
+            return st;
+        }
     }
-    for (int i = 0; i < training_data.size(); ++i) {
-        AI.train(training_data[i], vector<double>{K});
+    else {
+        step st = selectBestStep(AI);
+        doStep(st);
+        return st;
     }
+    throw exception("step not found");
+    return {};
 }
 
 bool coords::operator== (const coords& other) {

@@ -16,6 +16,10 @@ Settings.FirstStep.ComboBox.3: чёрные
 Settings.MaxSteps.Label: Макc. ходов
 Settings.Layers.Label: Слои
 Settings.Lr.Label: Коэффициент
+Settings.Sim.Label: Симуляции
+Settings.History.Label: Истории ходов
+Settings.Depth.Label: Глубина
+Settings.MaxDepth.Label: Макс. глубина
 Game.EndGame.white: ИГРА ОКОНЧЕНА! Победили Белые
 Game.EndGame.black: ИГРА ОКОНЧЕНА! Победили Чёрные
 Game.EndGame.draw: ИГРА ОКОНЧЕНА! Ничья

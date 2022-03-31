@@ -26,6 +26,7 @@ Class Chess.play: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     GameType gameType : Public
     Boolean isWhite : Public
     Boolean doTrain : Public
+    Boolean AI_busy : Public
     Int32 last : Public
 Class Chess.settings: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
@@ -33,3 +34,5 @@ Class Chess.settings: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
 Class Chess.Main: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    updateSettings(Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig

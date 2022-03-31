@@ -13,6 +13,7 @@ class neuralNetwork {
         double lr;
         int len;
         vector<matrix> W;
+        vector<double> biases;
 
         neuralNetwork(vector<int> layers, double lr);
 

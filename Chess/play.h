@@ -19,12 +19,13 @@ namespace Chess {
 
 	public ref class play : public System::Windows::Forms::Form {
 	public:
-		chess* game = new chess(1000);
+		chess* game = new chess();
 		neuralNetwork* AI;
 		string *weightsPath = new string;
 		GameType gameType = GameType::SINGLE;
 		bool isWhite = true;
 		bool doTrain = false;
+		bool AI_busy = false;
 		int last = -1;
 
 		play(Form^ mainForm, GameType gameType, bool isWhite, string weightsPath, 
@@ -169,7 +170,6 @@ namespace Chess {
 			}
 		}
 		void simulate() {
-			game->setMaxSteps(settingsManager::getInstance().maxSteps);
 			this->back->Visible = false;
 			worker->RunWorkerAsync(1);
 		}
@@ -189,7 +189,7 @@ namespace Chess {
 			return 8 * v.row + v.column;
 		}
 		void updateEndGame() {
-			endGame->Text = gcnew String(settingsManager::getInstance().lang("Game.EndGame." + game->getStatus()).c_str());
+			endGame->Text = gcnew String(settingsManager::getInstance().lang("Game.EndGame." + game->statusToString()).c_str());
 		}
 		void clearEndGame() {
 			endGame->Text = "";
@@ -1279,59 +1279,62 @@ namespace Chess {
 			if (gameType == GameType::TRAIN) progressBar->Value = progressBar->Maximum;
 		}
 		System::Void click(System::Windows::Forms::PictureBox^ pb, int n) {
-			if (last != -2 && gameType != GameType::TRAIN) {
-				if (last == -1) {
-					if (pb->BackgroundImage != nullptr) {
-						if (!isWhite) n = 63 - n;
-						last = n;
-						coords v = toCoords(last);
-						for (step st : game->current_steps) {
-							if (st.from == v) {
-								int ind = toComponent(st.to);
-								if (!isWhite) ind = 63 - ind;
-								this->board->Controls[ind]->BackColor = System::Drawing::Color::LightSteelBlue;
+			if(!AI_busy) {
+				if (last != -2 && gameType != GameType::TRAIN) {
+					if (last == -1) {
+						if (pb->BackgroundImage != nullptr) {
+							if (!isWhite) n = 63 - n;
+							last = n;
+							coords v = toCoords(last);
+							for (step st : game->current_steps) {
+								if (st.from == v) {
+									int ind = toComponent(st.to);
+									if (!isWhite) ind = 63 - ind;
+									this->board->Controls[ind]->BackColor = System::Drawing::Color::LightSteelBlue;
+								}
 							}
+							pb->BackColor = System::Drawing::Color::Red;
 						}
-						pb->BackColor = System::Drawing::Color::Red;
-					}
-				}
-				else {
-					if (!isWhite) n = 63 - n;
-					step st = toStep(last, n);
-					if (game->isEqualColor(st.from, st.to)) {
-						last = n;
-						dropColor();
-						coords v = toCoords(n);
-						for (step st : game->current_steps) {
-							if (st.from == v) {
-								int ind = toComponent(st.to);
-								if (!isWhite) ind = 63 - ind;
-								this->board->Controls[ind]->BackColor = System::Drawing::Color::LightSteelBlue;
-							}
-						}
-						pb->BackColor = System::Drawing::Color::Red;
 					}
 					else {
-						if (last != n) {
-							bool valid = game->doStep(st);
-							if (valid) {
-								if(settingsManager::getInstance().playSound) step_sound->Play();
-								string status = game->getStatus();
-								if (status != "ingame") {
-									this->endGame->Text = gcnew String(settingsManager::getInstance().lang("Game.EndGame."+status).c_str());
-									last = -2;
-									if (doTrain) {
+						if (!isWhite) n = 63 - n;
+						step st = toStep(last, n);
+						if (game->isEqualColor(st.from, st.to)) {
+							last = n;
+							dropColor();
+							coords v = toCoords(n);
+							for (step st : game->current_steps) {
+								if (st.from == v) {
+									int ind = toComponent(st.to);
+									if (!isWhite) ind = 63 - ind;
+									this->board->Controls[ind]->BackColor = System::Drawing::Color::LightSteelBlue;
+								}
+							}
+							pb->BackColor = System::Drawing::Color::Red;
+						}
+						else {
+							if (last != n) {
+								bool valid = game->doStep(st);
+								if (valid) {
+									if (settingsManager::getInstance().playSound) step_sound->Play();
+									string statusStr = game->statusToString();
+									GameStatus status = game->getStatus();
+									if (status != GameStatus::GAME) {
+										this->endGame->Text = gcnew String(settingsManager::getInstance().lang("Game.EndGame." + statusStr).c_str());
+										last = -2;
+										if (doTrain) {
+											worker_ai->RunWorkerAsync();
+										}
+									}
+									else if (gameType == GameType::AI) {
 										worker_ai->RunWorkerAsync();
 									}
 								}
-								else if (gameType == GameType::AI) {
-									worker_ai->RunWorkerAsync();
-								}
 							}
+							dropColor();
+							update();
+							last = -1;
 						}
-						dropColor();
-						update();
-						last = -1;
 					}
 				}
 			}
@@ -1339,19 +1342,18 @@ namespace Chess {
 		System::Void worker_DoWork(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^ e) {
 			while (true) {
 				endGame->Invoke(gcnew Action(this, &play::clearLogs));
-				string status = game->getStatus();
-
+				GameStatus status = game->getStatus();
 				if (worker->CancellationPending) {
 					e->Cancel = true;
 					break;
 				}
-
-				while (status == "ingame") {
+				AI_busy = true;
+				while (status == GameStatus::GAME) {
 					if (worker->CancellationPending) {
 						e->Cancel = true;
 						break;
 					}
-					game->doStepAI(*AI);
+					game->doStepAI(*AI, true, doTrain);
 					board->Invoke(gcnew Action(this, &play::update));
 					if (settingsManager::getInstance().playSound) step_sound->Play();
 					status = game->getStatus();
@@ -1359,7 +1361,7 @@ namespace Chess {
 				if (!e->Cancel) {
 					endGame->Invoke(gcnew Action(this, &play::updateEndGame));
 					log->Invoke(gcnew Action(this, &play::updateLogs));
-					game->trainAI(*AI);
+					mcts::getInstance().save();
 					AI->saveW(settingsManager::getInstance().path+"weights\\" + *weightsPath);
 					progressBar->Invoke(gcnew Action(this, &play::updateProgressBar));
 					if (progressBar->Value == progressBar->Maximum) {
@@ -1373,31 +1375,34 @@ namespace Chess {
 						board->Invoke(gcnew Action(this, &play::update));
 					}
 				}
+				AI_busy = false;
 			}
 			worker->CancelAsync();
 		}
 		System::Void worker_ai_DoWork(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^ e) {
-			string status = game->getStatus();
-			if (status != "ingame") {
+			GameStatus status = game->getStatus();
+			string statusStr = game->statusToString();
+			if (status != GameStatus::GAME) {
 				log->Invoke(gcnew Action(this, &play::updateLogs));
 				back->Invoke(gcnew Action<bool>(this, &play::backUpdate), false);
-				game->trainAI(*AI);
+				mcts::getInstance().save();
 				AI->saveW(settingsManager::getInstance().path+"weights\\" + *weightsPath);
 				log->Invoke(gcnew Action(this, &play::doneLogs));
 				back->Invoke(gcnew Action<bool>(this, &play::backUpdate), true);
 			}
 			else {
-				game->doStepAI(*AI);
+				AI_busy = true;
+				game->doStepAI(*AI, false, doTrain);
 				if (settingsManager::getInstance().playSound) step_sound->Play();
 				status = game->getStatus();
-				if (status != "ingame") {
-					string file = "icons/" + status + ".png";
+				if (status != GameStatus::GAME) {
+					string file = "icons/" + statusStr + ".png";
 					endGame->Invoke(gcnew Action(this, &play::updateEndGame));
 					last = -2;
 					if (doTrain) {
 						log->Invoke(gcnew Action(this, &play::updateLogs));
 						back->Invoke(gcnew Action<bool>(this, &play::backUpdate), false);
-						game->trainAI(*AI);
+						mcts::getInstance().save();
 						AI->saveW(settingsManager::getInstance().path+"weights\\" + *weightsPath);
 						log->Invoke(gcnew Action(this, &play::doneLogs));
 						back->Invoke(gcnew Action<bool>(this, &play::backUpdate), true);
@@ -1414,6 +1419,7 @@ namespace Chess {
 						}
 					}
 				}
+				AI_busy = false;
 			}
 			worker_ai->CancelAsync();
 		}

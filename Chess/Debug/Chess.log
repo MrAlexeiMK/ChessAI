@@ -1,27 +1,3 @@
-﻿  chess.cpp
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\chess.cpp(22,23): warning C4018: <: несоответствие типов со знаком и без знака
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\chess.cpp(35,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\chess.cpp(53,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\chess.cpp(71,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\chess.cpp(100,19): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\chess.cpp(592,50): warning C4018: >: несоответствие типов со знаком и без знака
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\chess.cpp(768,23): warning C4018: <: несоответствие типов со знаком и без знака
-  Main.cpp
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\settingsManager.h(119,21): warning C4018: <: несоответствие типов со знаком и без знака
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\Main.h(360,14): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  matrix.cpp
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\settingsManager.h(119,21): warning C4018: <: несоответствие типов со знаком и без знака
-  neuralNetwork.cpp
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\neuralNetwork.cpp(87,26): warning C4018: <: несоответствие типов со знаком и без знака
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\neuralNetwork.cpp(94,26): warning C4018: <: несоответствие типов со знаком и без знака
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\neuralNetwork.cpp(118,26): warning C4018: <: несоответствие типов со знаком и без знака
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\neuralNetwork.cpp(122,26): warning C4018: <: несоответствие типов со знаком и без знака
-  play.cpp
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\settingsManager.h(119,21): warning C4018: <: несоответствие типов со знаком и без знака
-  settings.cpp
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\settingsManager.h(119,21): warning C4018: <: несоответствие типов со знаком и без знака
-  .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
-  Создание кода...
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\chess.cpp(757): warning C4715: chess::doStepAI: значение возвращается не при всех путях выполнения
+﻿  mcts.cpp
   chess.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
   Chess.vcxproj -> D:\Catalog\Projects\MachineLearning\ChessAI\Debug\Chess.exe

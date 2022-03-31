@@ -121,6 +121,7 @@
     <ClCompile Include="chess.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="matrix.cpp" />
+    <ClCompile Include="mcts.cpp" />
     <ClCompile Include="neuralNetwork.cpp" />
     <ClCompile Include="play.cpp" />
     <ClCompile Include="settings.cpp" />
@@ -132,6 +133,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="matrix.h" />
+    <ClInclude Include="mcts.h" />
     <ClInclude Include="neuralNetwork.h" />
     <ClInclude Include="play.h">
       <FileType>CppForm</FileType>

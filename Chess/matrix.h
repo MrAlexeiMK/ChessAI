@@ -43,6 +43,7 @@ class matrix {
         void swapLines(int i1, int i2);
         vector<double> toList();
         matrix transpose();
+        double sum();
         int toTrinagular(bool down);
         void removeColumn(int index);
         void removeRow(int index);

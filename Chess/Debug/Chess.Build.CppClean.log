@@ -1,6 +1,12 @@
 d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.main.resources
 d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.play.resources
 d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.settings.resources
+d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chessai\chess\debug\chess.main.resources
+d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chessai\chess\debug\chess.play.resources
+d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chessai\chess\debug\chess.settings.resources
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.main.resources
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.play.resources
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.settings.resources
 d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\vc142.pdb
 d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\.netframework,version=v4.6.1.assemblyattributes.obj
 d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\settings.obj
@@ -9,14 +15,24 @@ d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\
 d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\matrix.obj
 d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\main.obj
 d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.obj
+d:\catalog\projects\machinelearning\chessai\chess\debug\vc142.pdb
+d:\catalog\projects\machinelearning\chessai\chess\debug\.netframework,version=v4.6.1.assemblyattributes.obj
+d:\catalog\projects\machinelearning\chessai\chess\debug\settings.obj
+d:\catalog\projects\machinelearning\chessai\chess\debug\play.obj
+d:\catalog\projects\machinelearning\chessai\chess\debug\neuralnetwork.obj
+d:\catalog\projects\machinelearning\chessai\chess\debug\matrix.obj
+d:\catalog\projects\machinelearning\chessai\chess\debug\main.obj
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.obj
 d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\debug\chess.exe
 d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\debug\chess.pdb
-d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.tlog\chess.write.1u.tlog
-d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.tlog\cl.command.1.tlog
-d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.tlog\cl.read.1.tlog
-d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.tlog\cl.write.1.tlog
-d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.tlog\link.command.1.tlog
-d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.tlog\link.read.1.tlog
-d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.tlog\link.write.1.tlog
-d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.tlog\metagen.read.1.tlog
-d:\catalog\projects\machinelearning\chess\c++ (windows forms)\chess\chess\debug\chess.tlog\metagen.write.1.tlog
+d:\catalog\projects\machinelearning\chessai\debug\chess.exe
+d:\catalog\projects\machinelearning\chessai\debug\chess.pdb
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.tlog\chess.write.1u.tlog
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.tlog\cl.command.1.tlog
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.tlog\cl.read.1.tlog
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.tlog\cl.write.1.tlog
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.tlog\link.command.1.tlog
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.tlog\link.read.1.tlog
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.tlog\link.write.1.tlog
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.tlog\metagen.read.1.tlog
+d:\catalog\projects\machinelearning\chessai\chess\debug\chess.tlog\metagen.write.1.tlog

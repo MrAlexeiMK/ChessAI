@@ -51,6 +51,10 @@ namespace Chess {
 			InitializeComponent();
 		}
 
+		void updateSettings(bool ch) {
+			settingsButton->Enabled = ch;
+		}
+
 	protected:
 		~Main() {
 			delete components;
@@ -193,6 +197,8 @@ namespace Chess {
 			// 
 			this->train_in_game->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
+			this->train_in_game->Checked = true;
+			this->train_in_game->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->train_in_game->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->train_in_game->Location = System::Drawing::Point(323, 12);
@@ -296,9 +302,9 @@ namespace Chess {
 			this->menu->TabIndex = 12;
 			this->menu->Text = L"menuStrip1";
 			// 
-			// settings
+			// settingsButton
 			// 
-			this->settingsButton->Name = L"settings";
+			this->settingsButton->Name = L"settingsButton";
 			this->settingsButton->Size = System::Drawing::Size(98, 24);
 			this->settingsButton->Text = L"Настройки";
 			this->settingsButton->Click += gcnew System::EventHandler(this, &Main::settings_Click);
@@ -357,7 +363,7 @@ namespace Chess {
 
 	private:
 		System::Void Main_Load(System::Object^ sender, System::EventArgs^ e) {
-			srand(time(NULL));
+			srand((unsigned int)time(NULL));
 			select->InitialDirectory = gcnew String((settingsManager::getInstance().path+"weights\\").c_str());
 			this->Text = gcnew String(settingsManager::getInstance().lang("Main").c_str());
 			start->Text = gcnew String(settingsManager::getInstance().lang("Main.SinglePlay").c_str());
@@ -415,6 +421,7 @@ namespace Chess {
 					break;
 				}
 				if (progress->Value == progress->Maximum) {
+					menu->Invoke(gcnew Action<bool>(this, &Main::updateSettings), true);
 					break;
 				}
 				Sleep(1000);

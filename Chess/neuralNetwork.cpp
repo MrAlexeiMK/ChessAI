@@ -8,13 +8,16 @@ using namespace std;
 
 #include "matrix.h"
 #include "neuralNetwork.h"
+#include "logManager.h"
 
 neuralNetwork::neuralNetwork(vector<int> layers_, double lr_) {
     layers = layers_;
     len = layers_.size();
     lr = lr_;
+    clearW();
     for(int i = 0; i < len-1; ++i) {
-        W.push_back(matrix(layers[i+1], layers[i], -1/sqrt(layers[i + 1]), 1/sqrt(layers[i+1])));
+        W[i] = matrix(layers[i+1], layers[i], -1/sqrt(layers[i + 1]), 1/sqrt(layers[i+1]));
+        biases[i] = 0;
     }
 }
 
@@ -39,23 +42,23 @@ void neuralNetwork::train(vector<double> input_list, vector<double> targets_list
     vector<matrix> outputs_array;
     outputs_array.push_back(outputs);
     for(int i = 0; i < len-1; ++i) {
-        outputs = activation_function(W[i]*outputs);
+        outputs = activation_function(W[i]*outputs + biases[i]);
         outputs_array.push_back(outputs);
     }
     matrix errors = targets-outputs;
     for(int i = len-2; i >= 0; --i) {
         matrix dif = (((errors * outputs_array[i + 1] * (-outputs_array[i + 1] + 1.0))) * outputs_array[i].transpose()) * lr;
         W[i] += dif;
+        biases[i] += dif.sum()/(dif.N*dif.M);
         errors = W[i].transpose()*errors;
     }
 }
 
 vector<double> neuralNetwork::query(vector<double> inputs_list) {
-    matrix inputs(inputs_list);
-    matrix outputs = inputs;
+    matrix outputs(inputs_list);
 
     for(int i = 0; i < len-1; ++i) {
-        outputs = activation_function(W[i]*outputs);
+        outputs = activation_function(W[i]*outputs + biases[i]);
     }
     vector<double> res;
     for(int i = 0; i < outputs.N; ++i) {
@@ -84,14 +87,14 @@ void neuralNetwork::train_from_csv(string path, char parser = ',', double max_nu
         while(ss >> temp) {
             array.push_back(temp);
         }
-        for(int i = 0; i < array.size(); ++i) {
+        for(size_t i = 0; i < array.size(); ++i) {
             array[i] = (double)((double)array[i]/max_num)*0.99 + 0.01;
         }
         X_train.push_back(array);
     }
 
     for(int e = 0; e < epohs; ++e) {
-        for(int i = 0; i < X_train.size(); ++i) {
+        for(size_t i = 0; i < X_train.size(); ++i) {
             if(vis) cout << 100*((double)(e*X_train.size() + (i+1))/(epohs*X_train.size())) << "%" << endl;
             train(X_train[i], Y_train[i]);
         }
@@ -115,11 +118,11 @@ void neuralNetwork::test_from_csv(string path, char parser = ',', double max_num
         while(ss >> temp) {
             inputs.push_back(temp);
         }
-        for(int i = 0; i < inputs.size(); ++i) {
+        for(size_t i = 0; i < inputs.size(); ++i) {
             inputs[i] = (double)((double)inputs[i]/max_num)*0.99 + 0.01;
         }
         outputs = query(inputs);
-        for(int i = 0; i < outputs.size(); ++i) {
+        for(size_t i = 0; i < outputs.size(); ++i) {
             if(outputs[i] > max_number) {
                 max_number = outputs[i];
                 label = i;
@@ -137,9 +140,12 @@ void neuralNetwork::saveW(string path) {
     for(int i = 0; i < len; ++i) {
         out << layers[i] << " ";
     }
+    out << endl;
+    for (int i = 0; i < len - 1; ++i) {
+        out << biases[i] << " ";
+    }
     out << endl << endl;
     for(int i = 0; i < len-1; ++i) {
-        out << W[i].N << " " << W[i].M << endl;
         out << W[i] << endl;
     }
     out.close();
@@ -159,16 +165,20 @@ void neuralNetwork::loadW(string path) {
         len = newLen;
         layers = new_layers;
         for (int i = 0; i < len - 1; ++i) {
-            in >> new_W[i];
+            in >> biases[i];
         }
-        W = new_W;
+        for (int i = 0; i < len - 1; ++i) {
+            in >> W[i];
+        }
     }
     in.close();
 }
 
 void neuralNetwork::clearW() {
     W.clear();
+    biases.clear();
     for(int i = 0; i < len-1; ++i) {
         W.push_back(matrix(layers[i+1], layers[i], 0, 1/sqrt(layers[i+1])));
+        biases.push_back(0);
     }
 }

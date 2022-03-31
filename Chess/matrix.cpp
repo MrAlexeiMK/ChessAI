@@ -321,6 +321,16 @@ matrix matrix::gauss(matrix& A, matrix& b) {
 	throw std::invalid_argument("Invalid matrix dimensions");
 }
 
+double matrix::sum() {
+	double res = 0;
+	for (int i = 0; i < N; ++i) {
+		for (int j = 0; j < M; ++j) {
+			res += data[i][j];
+		}
+	}
+	return res;
+}
+
 istream& operator>> (istream& in, matrix& x) {
 	try {
 		in >> x.N >> x.M;
@@ -342,6 +352,7 @@ istream& operator>> (istream& in, matrix& x) {
 
 ostream& operator<< (ostream& out, const matrix& x) {
 	try {
+		out << x.N << " " << x.M << endl;
 		for (int i = 0; i < x.N; ++i) {
 			for (int j = 0; j < x.M; ++j) {
 				out << x.data[i][j] << " ";
@@ -495,7 +506,7 @@ matrix matrix::operator*(const matrix& other) {
 }
 
 string matrix::toString() {
-	string res = "("+to_string(N)+";"+to_string(M)+")\n";
+	string res = to_string(N)+" "+to_string(M)+"\n";
 	for (int i = 0; i < N; ++i) {
 		for (int j = 0; j < M; ++j) {
 			res += to_string(data[i][j])+" ";

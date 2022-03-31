@@ -1,6 +1,10 @@
 LangFile: ru-RU.txt
 FirstStep: 0
 PlaySound: 1
-MaxSteps: 150
-Layers: 574,400,200,1
-LearningRate: 0.1
+MaxSteps: 100
+Layers: 768,300,200,1
+LearningRate: 0.05
+Simulations: 10
+HistorySteps: 3
+Depth: 100
+MaxDepth: 8

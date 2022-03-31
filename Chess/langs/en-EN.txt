@@ -16,6 +16,10 @@ Settings.FirstStep.ComboBox.3: black
 Settings.MaxSteps.Label: Max. steps
 Settings.Layers.Label: Layers
 Settings.Lr.Label: Factor
+Settings.Sim.Label: Simulations
+Settings.History.Label: History steps
+Settings.Depth.Label: Depth
+Settings.MaxDepth.Label: Max. depth
 Game.EndGame.white: GAME ENDED! Winner is White
 Game.EndGame.black: GAME ENDED! Winner is Black
 Game.EndGame.draw: GAME ENDED! Draw

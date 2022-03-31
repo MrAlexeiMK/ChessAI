@@ -6,51 +6,11 @@
 #include <string>
 #include <map>
 
+#include "structures.h"
 #include "neuralNetwork.h"
+#include "mcts.h"
 
 using namespace std;
-
-const char defaultPos[8][8] = {
-        {'1','2','3','4','5','3','2','1'},
-        {'0','0','0','0','0','0','0','0'},
-        {' ',' ',' ',' ',' ',' ',' ',' '},
-        {' ',' ',' ',' ',' ',' ',' ',' '},
-        {' ',' ',' ',' ',' ',' ',' ',' '},
-        {' ',' ',' ',' ',' ',' ',' ',' '},
-        {'6','6','6','6','6','6','6','6'},
-        {'7','8','9','a','b','9','8','7'}
-};
-
-class coords {
-public:
-    int row;
-    int column;
-    bool operator== (const coords& other);
-    bool operator!= (const coords& other);
-};
-
-class step {
-public:
-    coords from;
-    coords to;
-    bool operator== (const step& other);
-};
-
-struct properties {
-    bool white_king;
-    bool white_rook_right;
-    bool white_rook_left;
-    bool black_king;
-    bool black_rook_right;
-    bool black_rook_left;
-    coords white_king_coords;
-    coords black_king_coords;
-    bool isWhite;
-    vector<step> history;
-    bool isChecked;
-    int count_check_figs;
-    int repeat;
-};
 
 class chess {
     public:
@@ -62,11 +22,26 @@ class chess {
         vector<vector<char>> isOppositeField, isCheckField;
         vector<vector<coords>> ways;
         vector<vector<double>> training_data;
+        map<char, vector<double>> symbolMask{
+            {' ', {0.01,0.01,0.01,0.01}},
+            {'0', {0.01,0.01,0.01,0.99}},
+            {'1', {0.01,0.01,0.99,0.01}},
+            {'2', {0.01,0.01,0.99,0.99}},
+            {'3', {0.01,0.99,0.01,0.01}},
+            {'4', {0.01,0.99,0.01,0.99}},
+            {'5', {0.01,0.99,0.99,0.01}},
+            {'6', {0.01,0.99,0.99,0.99}},
+            {'7', {0.99,0.01,0.01,0.01}},
+            {'8', {0.99,0.01,0.01,0.99}},
+            {'9', {0.99,0.01,0.99,0.01}},
+            {'a', {0.99,0.01,0.99,0.99}},
+            {'b', {0.99,0.99,0.99,0.99}}
+        };
+
         bool isVirtual;
-        int MAX_STEPS;
+        bool updateTrainingData = true;
 
         chess();
-        chess(int max_steps);
         chess(char** start_pos);
         chess(char** start_pos, properties prop, bool virt);
 
@@ -74,7 +49,8 @@ class chess {
 
         void clear();
         void replay();
-        void setMaxSteps(int max_steps);
+        void fillTrainingData();
+        void setUpdateTrainingData(bool ch);
         vector<coords> getFigs(string reg);
         string getStringWhitePos();
         string getStringBlackPos();
@@ -83,6 +59,8 @@ class chess {
         void printSteps();
         void printPos(vector<vector<char>> p);
         vector<double> toArray();
+        size_t toHash();
+        size_t toHash(step st);
         bool isWhite(coords v);
         bool isBlack(coords v);
         bool isDiff(coords v1, coords v2);
@@ -95,11 +73,13 @@ class chess {
         bool isDraw();
         bool possibleStep(step st, bool onlyAttackFields);
         void updateSteps();
-        string getStatus();
+        GameStatus getStatus();
+        string statusToString();
         bool doStep(step st);
+        step selectBestStep(neuralNetwork &AI);
         bool isValidStep(step st);
-        step doStepAI(neuralNetwork &AI);
-        void trainAI(neuralNetwork &AI);
-        step notationToSteps(string notation);
+        void simulate(neuralNetwork &AI, size_t parent);
+        step doStepAI(neuralNetwork &AI, bool update = false, bool train = true);
+        void trainAI(neuralNetwork& AI, size_t node, vector<vector<double>> &data, bool isWhite);
 };
 #endif

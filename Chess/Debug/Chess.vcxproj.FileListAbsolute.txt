@@ -11,8 +11,8 @@ D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\ChessAI\Chess\Debu
 D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\ChessAI\Chess\Debug\Chess.play.resources
 D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\ChessAI\Chess\Debug\Chess.settings.resources
 D:\Catalog\Projects\MachineLearning\Chess\C++ (Windows forms)\ChessAI\Chess\Debug\Chess.vcxproj.GenerateResource.cache
-D:\Catalog\Projects\MachineLearning\ChessAI\Chess\Debug\Chess.vcxproj.AssemblyReference.cache
 D:\Catalog\Projects\MachineLearning\ChessAI\Chess\Debug\Chess.Main.resources
 D:\Catalog\Projects\MachineLearning\ChessAI\Chess\Debug\Chess.play.resources
 D:\Catalog\Projects\MachineLearning\ChessAI\Chess\Debug\Chess.settings.resources
 D:\Catalog\Projects\MachineLearning\ChessAI\Chess\Debug\Chess.vcxproj.GenerateResource.cache
+D:\Catalog\Projects\MachineLearning\ChessAI\Chess\Debug\Chess.vcxproj.AssemblyReference.cache
