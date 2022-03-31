@@ -70,15 +70,31 @@ AI.loadW(settingsManager::getInstance().path + "weights\\W.csv");
 ```  
   
  <b>[</b>mcts.h/mcts.cpp<b>]</b>:  
-Class for working with Monte-Carlo Tree    
-<ins>mcts.txt</ins> will store mcts tree by format:  
-```
-  [hash of position] [hash of parent position] [count of visits] [count of wins the player whose turn it is now] [step in 4 numbers]  
-```  
-
+Static class for working with Monte-Carlo Tree    
 ```
 #include "mcts.h"
+#include "logManager.h"
 
-neuralNetwork AI(settingsManager::getInstance().layers, settingsManager::getInstance().lr);
-AI.loadW(settingsManager::getInstance().path + "weights\\W.csv");
+mcts::getInstance().init("mcts.txt");
+mcts::getInstance().log();
+mcts& tree = mcts::getInstance();
 ```  
+
+<ins>mcts.txt</ins> will store mcts tree by format:  
+```
+[hash of position] [hash of parent position] [count of visits] [count of wins the player whose turn it is now] [step in 4 numbers]  
+```  
+
+ <b>[</b>chess.h/chess.cpp<b>]</b>:  
+Class containing the logic of the game of chess  
+```
+#include "chess.h"
+
+chess game();
+game.doStep({{6, 4},{4, 4}});
+game.printPos();
+```  
+  
+ <b>[</b>Main.h/play.h/settings.h<b>]</b>:  
+Windows forms classes of Main/Settings/Play menus  
+  
