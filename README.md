@@ -49,5 +49,33 @@ Static class to get access to settings.txt
 
 int depth = settingsManager::getInstance().depth;
 ```  
-   
- 
+  
+ <b>[</b>matrix.h/matrix.cpp<b>]</b>:  
+Class for working with matrices    
+```
+#include "matrix.h"
+
+matrix A({{1,2},{2,4},{0,1}});
+matrix B = A.inverse();
+```  
+  
+ <b>[</b>neuralNetwork.h/neuralNetwork.cpp<b>]</b>:  
+Class for working with neural network  (was tested on MNIST dataset and accuracy was above 60%)    
+```
+#include "settingsManager.h"
+#include "neuralNetwork.h"
+
+neuralNetwork AI(settingsManager::getInstance().layers, settingsManager::getInstance().lr);
+AI.loadW(settingsManager::getInstance().path + "weights\\W.csv");
+```  
+  
+ <b>[</b>mcts.h/mcts.cpp<b>]</b>:  
+Class for working with Monte-Carlo Tree    
+<ins>mcts.txt</ins> will store mcts tree by format:
+  [hash of position] [hash of parent position] [count of visits] [count of wins the player whose turn it is now] [step in 4 numbers]  
+```
+#include "mcts.h"
+
+neuralNetwork AI(settingsManager::getInstance().layers, settingsManager::getInstance().lr);
+AI.loadW(settingsManager::getInstance().path + "weights\\W.csv");
+```  
