@@ -1,8 +1,6 @@
 # ChessAI
  C++ Windows Forms application to play Chess with self-training Artificial Intelligence on Monte Carlo Tree  
-   
 <b><a href="https://github.com/MrAlexeiMK/Chess/raw/main/%D0%A8%D0%B0%D1%85%D0%BC%D0%B0%D1%82%D1%8B%20(%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D1%89%D0%B8%D0%BA).msi">DOWNLOAD</b></a>  
-  
 <b><a href="https://github.com/MrAlexeiMK/Chess">PREVIOUS VERSION</b></a>  
   
 Application Data Folder Path is "%appdata%/Chess by MrAlexeiMK" contains langs, weights, settings.txt, mcts.txt (Monte-Carlo Tree) and log.txt 
@@ -16,11 +14,13 @@ Application Data Folder Path is "%appdata%/Chess by MrAlexeiMK" contains langs, 
 <b>Instructions:</b>  
 Main menu:  
 <img src="https://user-images.githubusercontent.com/25348980/161140081-a0416ed0-ba0c-49d6-9fb0-664aa720bcb1.png" width="300"></img>  
+  
 [Play] - Play by yourself  
 [W.csv] [Play against AI] [train] - Play against AI with weights from file "W.csv", select "train" if you want to change your weights during the game  
 [W.csv] [Start training] [count] - Train Atrificial Intelligence by playing with itself "count" times with weights from file "W.csv"  
 Settings menu:  
-<img src="https://user-images.githubusercontent.com/25348980/161140928-59075c0e-d62a-4930-b799-21aeb34e553b.png" width="300"></img>  
+<img src="https://user-images.githubusercontent.com/25348980/161140928-59075c0e-d62a-4930-b799-21aeb34e553b.png" width="200"></img>  
+  
 [Language] - Select file with language  
 [First step] - Select who will go first in "Play against AI"  
 [Sound] - Play sound  
