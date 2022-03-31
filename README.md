@@ -33,9 +33,8 @@ Application Data Folder Path is "%appdata%/Chess by MrAlexeiMK" contains langs, 
 [Depth] - Depth of simulation (if reached and game is not ended - draw)  
 [Max. Depth] - Maximum depth of Monte-Carlo Tree from start node (if average number of moves in a position is 40 and Max. Depth is 8, then 40^7 ≈ 1.6e11 - average count of nodes in Monte-Carlo Tree)  
   
-<b>Documentation:<b>  
-<b><a href="https://github.com/MrAlexeiMK/ChessAI/tree/main/Chess">Sources</b></a>  
- [<b>logManager.h</b>]:  
+<b>Documentation:</b> (<b><a href="https://github.com/MrAlexeiMK/ChessAI/tree/main/Chess">Sources</b></a>)  
+ <b>[</b>logManager.h<b>]</b>:  
 Static class to print in log.txt  (saves after closing application)  
 ```
 #include "logManager.h"
@@ -43,7 +42,7 @@ Static class to print in log.txt  (saves after closing application)
 logManager::writeln("debug info");
 ```  
    
- [<b>settingsManager.h</b>]:  
+ <b>[</b>settingsManager.h<b>]</b>:  
 Static class to get access to settings.txt  
 ```
 #include "settingsManager.h"
