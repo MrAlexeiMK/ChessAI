@@ -31,7 +31,7 @@ Application Data Folder Path is "%appdata%/Chess by MrAlexeiMK" contains langs, 
 [Simulations] - Number of simulations from unknown position in Monte-Carlo Tree  
 [History Steps] - Last how many positions to remember? (if 3 - first layer of neural network should be 256•3=768)  
 [Depth] - Depth of simulation (if reached and game is not ended - draw)  
-[Max. Depth] - Maximum depth of Monte-Carlo Tree from start node (if average number of moves in a position is 40 and Max. Depth is 8, then 40^7 ≈ 1.6e11 - average count of nodes in Monte-Carlo Tree)  
+[Max. Depth] - Maximum depth of Monte-Carlo Tree from start node (if average number of moves in a position is 40 and Max. Depth is 8, then 40^8 ≈ 6.5e12 - average count of nodes in Monte-Carlo Tree)  
   
 <b>Documentation:</b> (<b><a href="https://github.com/MrAlexeiMK/ChessAI/tree/main/Chess">Sources</b></a>)  
  <b>[</b>logManager.h<b>]</b>:  
