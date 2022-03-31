@@ -12,13 +12,14 @@ Application Data Folder Path is "%appdata%/Chess by MrAlexeiMK" contains langs, 
 4) https://web.archive.org/web/20180623055344/http://mcts.ai/about/index.html  
   
 <b>Instructions:</b>  
-Main menu:  
+<b>Main menu:</b>  
 <img src="https://user-images.githubusercontent.com/25348980/161140081-a0416ed0-ba0c-49d6-9fb0-664aa720bcb1.png" width="300"></img>  
   
 [Play] - Play by yourself  
 [W.csv] [Play against AI] [train] - Play against AI with weights from file "W.csv", select "train" if you want to change your weights during the game  
 [W.csv] [Start training] [count] - Train Atrificial Intelligence by playing with itself "count" times with weights from file "W.csv"  
-Settings menu:  
+  
+<b>Settings menu:</b>  
 <img src="https://user-images.githubusercontent.com/25348980/161140928-59075c0e-d62a-4930-b799-21aeb34e553b.png" width="200"></img>  
   
 [Language] - Select file with language  
