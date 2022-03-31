@@ -71,8 +71,11 @@ AI.loadW(settingsManager::getInstance().path + "weights\\W.csv");
   
  <b>[</b>mcts.h/mcts.cpp<b>]</b>:  
 Class for working with Monte-Carlo Tree    
-<ins>mcts.txt</ins> will store mcts tree by format:
+<ins>mcts.txt</ins> will store mcts tree by format:  
+```
   [hash of position] [hash of parent position] [count of visits] [count of wins the player whose turn it is now] [step in 4 numbers]  
+```  
+
 ```
 #include "mcts.h"
 
