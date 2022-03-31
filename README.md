@@ -35,7 +35,7 @@ Application Data Folder Path is "%appdata%/Chess by MrAlexeiMK" contains langs, 
   
 <b>Documentation:<b>  
 <b><a href="https://github.com/MrAlexeiMK/ChessAI/tree/main/Chess">Sources</b></a>  
-<b>[</b>logManager.h<b>]</b>:  
+ [<b>logManager.h</b>]:  
 Static class to print in log.txt  (saves after closing application)  
 ```
 #include "logManager.h"
@@ -43,7 +43,7 @@ Static class to print in log.txt  (saves after closing application)
 logManager::writeln("debug info");
 ```  
    
-<b>[</b>settingsManager.h<b>]</b>:  
+ [<b>settingsManager.h</b>]:  
 Static class to get access to settings.txt  
 ```
 #include "settingsManager.h"
